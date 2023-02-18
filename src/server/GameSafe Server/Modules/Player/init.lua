@@ -29,9 +29,14 @@ function Player:GetPlayer(player)
     return Players[player]
 end
 
+function Player:GetAllPlayers()
+    return Players
+end
+
 function Player:Create(player)
     print("Player Created from Create Function")
     Players[player] = Class.new(player)
+    print(Players[player]:HasExceededTime())
 end
 
 function Player:Destroy(player)
