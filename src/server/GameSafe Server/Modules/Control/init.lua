@@ -4,8 +4,15 @@
 ]]
 
 local Player = require(script.Parent.Player)
-Control = {}
---Control.__index = Control
+local HookManager = require(game:GetService("ReplicatedStorage").Common["GameSafe Shared"].Hooks)
+
+local Signals = {}
+
+local Control = {}
+
+local Events = {
+    ["PauseEvent"] = Instance.new("BindableEvent")
+}
 
 function Control:HandleTimeRestrictions()
     for _, player in (Player:GetAllPlayers()) do
@@ -15,11 +22,24 @@ function Control:HandleTimeRestrictions()
     end
 end
 
+function Control:HandlePause()
+    for _, player in (Player:GetAllPlayers()) do
+        --local pauseState = player:GetPauseState()
+        Events["PauseEvent"]:Fire(player.Player)
+    end
+end
+
 
 
 function Control:RunAllChecks()
     print("yoo")
     self:HandleTimeRestrictions()
+end
+
+function Control:Start()
+    HookManager.Init(Events)
+    HookManager:Start()
+    self:HandlePause()
 end
 
 return Control
