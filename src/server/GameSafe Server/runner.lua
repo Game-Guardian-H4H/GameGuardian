@@ -29,11 +29,13 @@ function GameSafe:Start()
     warn("[GameSafe] Starting...")
     assert(Network:CheckForConnection(), "Failed to Connect to GameSafe Server. Terminating!")
     Player:UpdateAll()
+    Control:Start()
     warn("[GameSafe] Loaded Successfully!")
 end
 
 GameSafe.PlayerAdded = game.Players.PlayerAdded:Connect(function(player)
     Player:Create(player)
+    Control:HandlePause()
 end)
 
 GameSafe.PlayerRemoving = game.Players.PlayerRemoving:Connect(function(player)
@@ -43,7 +45,7 @@ end)
 GameSafe.MasterLoop = task.spawn(function()
     while true do
         task.wait(10)
-        Control:RunAllChecks()
+        --Control:RunAllChecks()
     end
 end)
 
