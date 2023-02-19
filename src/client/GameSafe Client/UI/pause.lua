@@ -21,16 +21,9 @@ function UI:Create()
     screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
     screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-    local fullFrame = Instance.new("Frame")
-        fullFrame.Name = "fullFrame"
-        fullFrame.Parent = screenGui
-        fullFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        fullFrame.BackgroundTransparency = 1.000
-        fullFrame.Size = UDim2.fromScale(1, 1)
-
     mainFrame = Instance.new("CanvasGroup")
         mainFrame.Name = "mainFrame"
-        mainFrame.Parent = fullFrame
+        mainFrame.Parent = screenGui
         mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
         mainFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         mainFrame.GroupTransparency = 1
@@ -90,7 +83,7 @@ function UI:Create()
         infoText.Size = UDim2.fromScale(0.888999701, 0.174763456)
         infoText.FontFace = Font.fromId(11702779409)
         infoText.FontFace.Weight = Enum.FontWeight.Medium
-        infoText.Text = "Your parent has paused access to Roblox. You cannot play until they reenable play."
+        infoText.Text = "Your parent has paused access to Roblox. Controls are disabled until they reenable play."
         infoText.TextColor3 = Color3.fromRGB(77, 77, 77)
         infoText.TextScaled = true
         infoText.TextSize = 14.000
@@ -196,7 +189,9 @@ function UI:Render(state)
         TweenService:Create(mainFrame, TweenInfo.new(1.5), {GroupTransparency = 0}):Play()
     else
         TweenService:Create(screenBlur, TweenInfo.new(1.5), {Size = 0}):Play()
-        TweenService:Create(mainFrame, TweenInfo.new(1.5), {GroupTransparency = 1}):Play():Wait()
+        local tween = TweenService:Create(mainFrame, TweenInfo.new(1.5), {GroupTransparency = 1})
+        tween:Play()
+        tween.Completed:Wait()
         screenBlur.Enabled = false
         screenGui.Enabled = false
     end
