@@ -36,7 +36,7 @@ function Player:UpdatePlayer(player)
         self:GetPlayer(player).Data.PauseMessage = data.pauseMessage
 
         if self:GetPlayer(player).Data.CurrentSeconds < 0 then
-            self:GetPlayer(player).Data.CurrentSeconds = data.currentTime
+            self:GetPlayer(player).Data.CurrentSeconds = data.currentTime * 60
         end
     end)
 end

@@ -193,6 +193,8 @@ function UI:Render(state, message)
         TweenService:Create(screenBlur, TweenInfo.new(1.5), {Size = 24}):Play()
         TweenService:Create(mainFrame, TweenInfo.new(1.5), {GroupTransparency = 0}):Play()
     else
+        mainFrame.GroupTransparency = 0
+        screenBlur.Size = 24
         TweenService:Create(screenBlur, TweenInfo.new(1.5), {Size = 0}):Play()
         local tween = TweenService:Create(mainFrame, TweenInfo.new(1.5), {GroupTransparency = 1})
         tween:Play()

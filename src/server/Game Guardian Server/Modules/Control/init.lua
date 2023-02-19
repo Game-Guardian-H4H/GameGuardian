@@ -65,9 +65,9 @@ function Control:RunAllChecks()
         self:HandleTime()
     end
     Player:UpdateAll()
+    self:UpdateTimePlayed()
     self:HandleTimeRestrictions()
     self:HandlePause()
-    self:UpdateTimePlayed()
 end
 
 -- Starts the Service

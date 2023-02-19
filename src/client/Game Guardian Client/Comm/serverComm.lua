@@ -38,5 +38,4 @@ TimeRemote.OnClientEvent:Connect(function(timeRemaining)
     end
 end)
 
-
 return {}
