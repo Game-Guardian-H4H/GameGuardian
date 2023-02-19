@@ -9,9 +9,9 @@ function PlayerClass.new(player)
     self.PlayerID = player.UserId
 
     self.Data = {
-        AllowedMinutes = 10;
-        CurrentMinutes = 20;
-        PauseState = "Idle";
+        AllowedMinutes = 1;
+        CurrentMinutes = 0;
+        PauseState = "Enabled";
     }
 
     return self
@@ -19,6 +19,10 @@ end
 
 function PlayerClass:HasExceededTime()
     return self.Data.AllowedMinutes <= self.Data.CurrentMinutes
+end
+
+function PlayerClass:GetPauseState()
+    return self.Data.PauseState
 end
 
 return PlayerClass

@@ -24,8 +24,8 @@ end
 
 function Control:HandlePause()
     for _, player in (Player:GetAllPlayers()) do
-        --local pauseState = player:GetPauseState()
-        Events["PauseEvent"]:Fire(player.Player)
+        local pauseState = player:GetPauseState()
+        Events["PauseEvent"]:Fire(player.Player, pauseState)
     end
 end
 
